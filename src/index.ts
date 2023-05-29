@@ -1,7 +1,19 @@
-import { welcomeMessage } from './welcome';
+import express from 'express';
 
-const projectName: string = 'TypeScript Starter';
+const app = express();
 
-const message = welcomeMessage(projectName);
+app.get('/api', (req, res) => {
+  res.send('Hello World!');
+});
 
-console.log(message);
+app.get('/api/nested', (req, res) => {
+  res.send('Nested Hello World!');
+});
+
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Listening at http://localhost:${port}/`);
+});
+
+export default app;
