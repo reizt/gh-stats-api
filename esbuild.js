@@ -19,9 +19,10 @@ if (env === 'development') {
   options.sourcemap = true;
   options.external = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})];
 } else if (env === 'production') {
-  options.outfile = resolve(__dirname, './dist/production.js');
+  options.outfile = resolve(__dirname, './api/production.js');
   options.minify = true;
   options.sourcemap = false;
+  options.external = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})];
 } else {
   throw new Error(`Invalid env: ${env}`);
 }

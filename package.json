@@ -10,7 +10,7 @@
     "build:dev": "node esbuild.js development",
     "start:dev": "node --enable-source-maps dist/development.js",
     "build": "NODE_ENV=production node esbuild.js production",
-    "start": "NODE_ENV=production node dist/production.js",
+    "start": "NODE_ENV=production node api/index.js",
     "lint": "run-s lint:prettier lint:eslint lint:tsc",
     "lint:prettier": "prettier --check src",
     "lint:eslint": "eslint",

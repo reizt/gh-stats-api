@@ -6,6 +6,7 @@ ignorePatterns:
   - /node_modules/**/*
   - /tmp/**/*
   - /esbuild.js
+  - /api
 plugins:
   - '@typescript-eslint'
 extends:

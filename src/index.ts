@@ -10,6 +10,13 @@ app.get('/api/nested', (req, res) => {
   res.send('Nested Hello World!!!!!');
 });
 
+const router = express.Router();
+router.get('/bar', (req, res) => {
+  res.send('Bar!!!!!');
+});
+
+app.use('/api/foo', router);
+
 const port = 3000;
 
 app.listen(port, () => {
