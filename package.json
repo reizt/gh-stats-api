@@ -1,0 +1,13 @@
+{
+  "name": "vercel-express",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo 'Nothing to build'",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
