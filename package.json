@@ -1,13 +1,42 @@
 {
-  "name": "vercel-express",
+  "name": "ts-starter",
   "version": "1.0.0",
-  "main": "index.js",
+  "repository": "git@github.com:reizt/ts-starter.git",
+  "author": "reizt <reizt.dev@gmail.com>",
   "license": "MIT",
+  "type": "commonjs",
   "scripts": {
-    "build": "echo 'Nothing to build'",
-    "start": "node index.js"
+    "dev": "nodemon --exec \"yarn build:dev && yarn start:dev\" --watch src --ext ts --delay 0",
+    "build:dev": "node esbuild.js development",
+    "start:dev": "node --enable-source-maps dist/development.js",
+    "build": "NODE_ENV=production node esbuild.js production",
+    "start": "NODE_ENV=production node dist/production.js",
+    "lint": "run-s lint:prettier lint:eslint lint:tsc",
+    "lint:prettier": "prettier --check src",
+    "lint:eslint": "eslint",
+    "lint:tsc": "tsc --noEmit",
+    "format": "run-s format:prettier format:eslint",
+    "format:prettier": "prettier --write --loglevel silent src",
+    "format:eslint": "eslint --fix",
+    "organize": "yarn format && lint:tsc",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "coverage": "vitest run --coverage"
   },
-  "dependencies": {
-    "express": "^4.18.2"
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint": "^8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^2.0.22",
+    "prettier": "^2.8.8",
+    "typescript": "^5.0.4",
+    "vitest": "^0.31.1",
+    "yarn-run-all": "^3.1.1"
   }
 }

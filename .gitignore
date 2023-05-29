@@ -1,2 +1,13 @@
 node_modules
+
+dist/*
+!dist/.keep
+
+tmp/*
+!tmp/.keep
+
+yarn-error.log
+*.env*
+.DS_Store
+
 .vercel
