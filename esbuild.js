@@ -1,12 +1,13 @@
-const pkg = require('./package.json');
 const { build } = require('esbuild');
 const { resolve } = require('path');
+const { vanillaExtractPlugin } = require('@vanilla-extract/esbuild-plugin');
 
 /** @type {import('esbuild').BuildOptions} */
 const opts = {
   tsconfig: resolve(__dirname, './tsconfig.json'),
   platform: 'node',
   define: { 'process.env.NODE_ENV': `"${process.env.NODE_ENV}"` },
+  plugins: [vanillaExtractPlugin()],
   color: true,
   bundle: true,
 };

@@ -19,8 +19,8 @@ api.get('/top-langs', async (req, res) => {
   try {
     const { userName, limit } = querySchema.parse(req.query);
     const langs = await fetchTopLangs({ userName, limit });
-    const svg = renderTopLangs(langs);
-    res.setHeader('Content-Type', 'image/svg+xml');
+    const svg = renderTopLangs(userName, langs);
+    res.setHeader('Content-Type', 'text/html');
     res.send(svg);
   } catch (err) {
     console.log(err);
