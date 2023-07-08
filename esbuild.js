@@ -4,7 +4,6 @@ const { resolve } = require('path');
 
 /** @type {import('esbuild').BuildOptions} */
 const options = {
-  entryPoints: [resolve(__dirname, './src/index.ts')],
   define: { 'process.env.NODE_ENV': `"${process.env.NODE_ENV}"` },
   target: 'es2022',
   platform: 'node',
@@ -14,11 +13,13 @@ const options = {
 
 const env = process.argv[2];
 if (env === 'development') {
+  options.entryPoints = [resolve(__dirname, './src/launch.ts')];
   options.outfile = resolve(__dirname, './dist/development.js');
   options.minify = false;
   options.sourcemap = true;
   options.external = [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})];
 } else if (env === 'production') {
+  options.entryPoints = [resolve(__dirname, './src/vercel.ts')];
   options.outfile = resolve(__dirname, './api/production.js');
   options.minify = true;
   options.sourcemap = false;

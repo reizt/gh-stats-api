@@ -17,10 +17,4 @@ router.get('/bar', (req, res) => {
 
 app.use('/api/foo', router);
 
-const port = 3000;
-
-app.listen(port, () => {
-  console.log(`Listening at http://localhost:${port}/`);
-});
-
 export default app;
