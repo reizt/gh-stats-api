@@ -11,7 +11,7 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
   return (
     <div
       style={{
-        width: '300px',
+        width: '375px',
         display: 'flex',
         flexDirection: 'column',
       }}

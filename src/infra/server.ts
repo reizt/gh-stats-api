@@ -54,7 +54,7 @@ api.get('/top-langs.svg', async (req, res) => {
           style: 'normal',
         },
       ],
-      width: 320,
+      width: 375,
       height: 200,
     });
     res.setHeader('Content-Type', 'image/svg+xml');
