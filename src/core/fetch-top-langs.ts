@@ -15,7 +15,7 @@ type LangNode = {
 
 type Input = {
   userName: string;
-  limit?: number;
+  limit: number;
 };
 
 export type LangStat = {
@@ -53,7 +53,7 @@ export const fetchTopLangs = async ({ userName, limit }: Input): Promise<Output>
       }`,
       variables: {
         login: userName,
-        limit: limit ?? 10,
+        limit,
       },
     },
     headers: {

@@ -1,4 +1,7 @@
+import axios from 'axios';
 import * as React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import satori from 'satori';
 import type { LangStat } from './fetch-top-langs';
 
 type Props = {
@@ -16,13 +19,6 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
         flexDirection: 'column',
       }}
     >
-      {/* <style>
-        {`
-          .lang-link:hover, .lang-link:hover span {
-            color: #2f81f7 !important;
-          }
-        `}
-      </style> */}
       <div style={{ display: 'flex', marginBottom: '10px', height: '8px', borderRadius: '4px', overflow: 'hidden' }}>
         {langs.map((lang) => (
           <div key={lang.name} style={{ width: `${lang.rate * 100}%`, height: '100%', backgroundColor: lang.color }}></div>
@@ -65,6 +61,36 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
   );
 };
 
-export const renderTopLangs = (props: Props) => {
-  return <TopLangsSVG {...props} />;
+export const renderTopLangs = async ({ output, ...props }: Props & { output: 'html' | 'svg' }) => {
+  const reactNode = <TopLangsSVG {...props} />;
+  switch (output) {
+    case 'html': {
+      const html = ReactDOMServer.renderToString(reactNode);
+      return html;
+    }
+    case 'svg': {
+      const fontUrlRoot = 'https://d3qgfj7bktqmwv.cloudfront.net';
+      const { data: robotoRegular } = await axios.get(`${fontUrlRoot}/Roboto-Regular.ttf`, { responseType: 'arraybuffer' });
+      const { data: robotoBold } = await axios.get(`${fontUrlRoot}/Roboto-Bold.ttf`, { responseType: 'arraybuffer' });
+      const svg = await satori(reactNode, {
+        fonts: [
+          {
+            name: 'Roboto',
+            data: robotoRegular,
+            weight: 400,
+            style: 'normal',
+          },
+          {
+            name: 'Roboto',
+            data: robotoBold,
+            weight: 700,
+            style: 'normal',
+          },
+        ],
+        width: 375,
+        height: 200,
+      });
+      return svg;
+    }
+  }
 };
