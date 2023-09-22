@@ -1,14 +1,10 @@
-node_modules
-
-dist/*
-!dist/.keep
-
-tmp/*
-!tmp/.keep
-
-yarn-error.log
-*.env*
-.DS_Store
+/node_modules
+/.build
+/.tsc
+/tmp
+/yarn-error.log
+/*.env*
+/.DS_Store
 
 .vercel
 /api/production.js

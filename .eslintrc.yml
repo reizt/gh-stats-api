@@ -3,10 +3,7 @@ env:
   es2022: true
   node: true
 ignorePatterns:
-  - /node_modules/**/*
-  - /tmp/**/*
-  - /esbuild.js
-  - /api
+  - /config/build.mjs
 plugins:
   - '@typescript-eslint'
 extends:
@@ -17,10 +14,8 @@ parser: '@typescript-eslint/parser'
 parserOptions:
   project: './tsconfig.json'
 rules:
-  # eslint
   semi: off
 
-  # @typescript-eslint
   '@typescript-eslint/array-type':
     - error
     - default: array

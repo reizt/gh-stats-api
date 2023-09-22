@@ -1,42 +1,40 @@
 {
-  "include": ["src/**/*.ts", "src/**/*.tsx", "env.d.ts", "vitest.config.ts"],
-  "exclude": ["node_modules", "tmp/**/*.ts", "dist"],
+  "include": ["src/**/*.ts", "config/*.ts", "*.ts"],
+  "exclude": ["node_modules"],
   "compilerOptions": {
+    // target
     "target": "ES2022",
-    "module": "NodeNext",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "moduleResolution": "node",
+    "module": "ES2022",
+    "moduleResolution": "Node",
+    "types": ["vitest/globals"],
+
+    // paths
     "baseUrl": "./",
-    "outDir": "dist",
+    "outDir": ".tsc",
     "paths": {
       "#/*": ["src/*"]
     },
-    "sourceMap": false,
+
+    // transpilation
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowJs": true,
-    "checkJs": false,
-    "composite": true,
-    "diagnostics": true,
-    "extendedDiagnostics": true,
     "incremental": true,
     "isolatedModules": true,
     "jsx": "react",
 
+    // diagnostics
+    "diagnostics": true,
+    "extendedDiagnostics": true,
+
     // syntax
+    "esModuleInterop": true,
+    "skipLibCheck": true,
     "strict": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": false,
     "noUncheckedIndexedAccess": true,
-    "allowUmdGlobalAccess": false,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
-    "noStrictGenericChecks": false,
     "noUnusedLocals": true,
-    "verbatimModuleSyntax": true,
-
-    "types": ["vitest/globals"]
+    "verbatimModuleSyntax": true
   }
 }
