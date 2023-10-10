@@ -3,7 +3,8 @@ env:
   es2022: true
   node: true
 ignorePatterns:
-  - /config/build.mjs
+  - /esbuild.mjs
+  - /api/*.js
 plugins:
   - '@typescript-eslint'
 extends:

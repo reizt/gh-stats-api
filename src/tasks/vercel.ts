@@ -1,3 +1,3 @@
-import server from '../infra/server';
+import app from '../api/app';
 
-export default server;
+export default app;

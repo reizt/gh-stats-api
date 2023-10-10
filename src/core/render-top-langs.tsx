@@ -27,16 +27,14 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
         {langs.map((lang) => (
           <a
-            href={`https://github.com/search?q=user%3A${userName}++language%3A${lang.name}&type=code`}
+            href={`https://github.com/search?q=${encodeURIComponent(`user:${userName}++language:${lang.name}`)}&type=code`}
             key={lang.name}
-            className="lang-link"
             style={{ display: 'flex', alignItems: 'center', columnGap: '5px', textDecoration: 'none' }}
           >
             <span style={{ width: '16px', height: '16px', display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '8px' }}>
               <span style={{ width: '8px', height: '8px', backgroundColor: lang.color, borderRadius: '100%' }} />
             </span>
             <span
-              className="lang-name"
               style={{
                 fontFamily: 'Roboto',
                 fontWeight: 'bold',
@@ -47,13 +45,14 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
               {lang.name}
             </span>
             <span
-              className="lang-rate"
               style={{
                 fontFamily: 'Roboto',
                 fontWeight: 'normal',
                 color: theme === 'light' ? '#57606a' : '#7d8590',
               }}
-            >{`${(lang.rate * 100).toFixed(1)}%`}</span>
+            >
+              {`${(lang.rate * 100).toFixed(1)}%`}
+            </span>
           </a>
         ))}
       </div>
