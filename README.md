@@ -1,24 +1,86 @@
 # 👾 Github Language Stats
 
-リポジトリの Languages 欄とそっくりな Stats を SVG で取得できます。
-Github の README.md に以下のコードを貼るとテーマに応じて異なる画像を表示することができます。
-`USERNAME`は適宜置き換えてください。
+## Overview
 
-```md
-<a href="https://github.com/USERNAME#gh-light-mode-only">
-  <img class="languages light" src="https://gh-stats-api.reizt.dev/api/top-langs.svg?username=USERNAME&theme=light" width="260"/>
-</a>
-<a href="https://github.com/USERNAME#gh-stats-api-dark-mode-only">
-  <img class="languages dark" src="https://gh-stats-api.reizt.dev/api/top-langs.svg?username=USERNAME&theme=dark" width="260"/>
-</a>
+You can show your Github language stats like the `Languages` section in the repository.
+
+## Samples
+
+Light Theme | Dark Theme
+
+<img src="./example/light.svg" width="260"/>
+<img src="./example/dark.svg" width="260"/>
+
+## How to use
+
+**URL**: https://gh-stats-api.reizt.dev/api/langs
+
+**Query Parameters**:
+
+<!-- table -->
+
+| Name       | Type   | Description                           | Required | Default |
+| ---------- | ------ | ------------------------------------- | -------- | ------- |
+| `username` | string | Github username                       | Y        | -       |
+| `theme`    | string | Theme of the chart. `light` or `dark` | N        | `light` |
+| `limit`    | number | Limit of the languages                | N        | 10      |
+| `output`   | string | Output format. `svg` or `html`        | N        | `svg`   |
+
+## Set up your profile
+
+> Note: Save your SVG files in the repository due to the limitation of Github API.
+
+Please replace `xxx` with your username.
+
+1. Create a repository `xxx/xxx` if not exists.
+2. Get the SVGs by the API.
+
+```sh
+curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=xxx&theme=light' > ./langs.light.svg
+curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=xxx&theme=dark'  > ./langs.dark.svg
 ```
 
-HTML で取得したい場合: https://gh-stats-api.reizt.dev/api/top-langs.html?username=USERNAME
+1. Show the SVGs in `README.md`.
 
-## Tech Stacks
+> Note: You can use `gh-light-mode-only` and `gh-dark-mode-only` to show the SVGs in different themes
 
-- API: Vercel Express
-- Data Fetching: axios
-- HTML Rendering: React, React DOM
-- HTML -> SVG Conversion: satori
-- Input Validation: Zod
+```md
+<img src="./langs.light.svg#gh-light-mode-only" width="330"/>
+<img src="./langs.dark.svg#gh-dark-mode-only" width="330"/>
+```
+
+## Daily Update
+
+You can use cron job in Github Actions to update the SVGs daily.
+
+```yml
+on:
+  schedule:
+    - cron: 0 0 * * * # every day
+  push:
+    branches:
+      - main
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      USERNAME: xxx
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get SVGs
+        run: |
+          curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=${{ env.USERNAME }}&theme=light' > ./langs.light.svg
+          curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=${{ env.USERNAME }}&theme=dark'  > ./langs.dark.svg
+      - name: Commit
+        run: |
+          git remote set-url origin https://github-actions:${{ github.token }}@github.com/${{ github.repository }}
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          if (git diff --shortstat | grep '[0-9]'); then
+            git add .
+            git commit -m "Update language stats"
+            git push origin main
+          fi
+```
