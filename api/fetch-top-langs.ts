@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 type LangNode = {
 	name: string;
 	languages: {
@@ -14,7 +12,7 @@ type LangNode = {
 };
 
 type Input = {
-	userName: string;
+	username: string;
 	limit: number;
 };
 
@@ -26,11 +24,13 @@ export type LangStat = {
 
 type Output = LangStat[];
 
-export const fetchTopLangs = async ({ userName, limit }: Input): Promise<Output> => {
-	const response = await axios.request({
+export const fetchTopLangs = async ({ username, limit }: Input): Promise<Output> => {
+	const response = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
-		url: 'https://api.github.com/graphql',
-		data: {
+		headers: new Headers({
+			Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
+		}),
+		body: JSON.stringify({
 			query: `
       query userInfo($login: String!, $limit: Int!) {
         user(login: $login) {
@@ -51,16 +51,14 @@ export const fetchTopLangs = async ({ userName, limit }: Input): Promise<Output>
         }
       }`,
 			variables: {
-				login: userName,
+				login: username,
 				limit,
 			},
-		},
-		headers: {
-			Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
-		},
+		}),
 	});
 
-	const nodes = response.data.data.user.repositories.nodes as LangNode[];
+	const responseJson = await response.json();
+	const nodes = responseJson.data.user.repositories.nodes as LangNode[];
 
 	const langsMap: Record<string, { color: string; size: number }> = {};
 	let totalSize = 0;

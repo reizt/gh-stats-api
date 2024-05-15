@@ -1,8 +1,7 @@
 /node_modules
 /tmp
+/.vercel
 
 *.env*
 .DS_Store
-
-.vercel
-/api/vercel.js
+*.tsbuildinfo

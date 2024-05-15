@@ -1,4 +1,3 @@
-import axios from 'axios';
 // biome-ignore lint/style/useImportType: <explanation>
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -6,12 +5,12 @@ import satori from 'satori';
 import type { LangStat } from './fetch-top-langs';
 
 type Props = {
-	userName: string;
+	username: string;
 	langs: LangStat[];
 	theme: 'light' | 'dark';
 };
 
-const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
+const TopLangsSVG: React.FC<Props> = ({ username, langs, theme }) => {
 	return (
 		<div
 			style={{
@@ -28,7 +27,7 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
 			<div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
 				{langs.map((lang) => (
 					<a
-						href={`https://github.com/search?q=${encodeURIComponent(`user:${userName}++language:${lang.name}`)}&type=code`}
+						href={`https://github.com/search?q=${encodeURIComponent(`user:${username}++language:${lang.name}`)}&type=code`}
 						key={lang.name}
 						style={{ display: 'flex', alignItems: 'center', columnGap: '5px', textDecoration: 'none' }}
 					>
@@ -61,6 +60,12 @@ const TopLangsSVG: React.FC<Props> = ({ userName, langs, theme }) => {
 	);
 };
 
+const fetchFont = async (url: string) => {
+	const response = await fetch(url);
+	const buffer = await response.arrayBuffer();
+	return buffer;
+};
+
 export const renderTopLangs = async ({ output, ...props }: Props & { output: 'html' | 'svg' }) => {
 	const reactNode = <TopLangsSVG {...props} />;
 	switch (output) {
@@ -69,20 +74,20 @@ export const renderTopLangs = async ({ output, ...props }: Props & { output: 'ht
 			return html;
 		}
 		case 'svg': {
-			const fontUrlRoot = 'https://d3qgfj7bktqmwv.cloudfront.net';
-			const { data: robotoRegular } = await axios.get(`${fontUrlRoot}/Roboto-Regular.ttf`, { responseType: 'arraybuffer' });
-			const { data: robotoBold } = await axios.get(`${fontUrlRoot}/Roboto-Bold.ttf`, { responseType: 'arraybuffer' });
+			const fontUrlRoot = 'https://fonts.werp.in';
+			const robotoRegularFont = await fetchFont(`${fontUrlRoot}/Roboto-Regular.ttf`);
+			const robotoBoldFont = await fetchFont(`${fontUrlRoot}/Roboto-Bold.ttf`);
 			const svg = await satori(reactNode, {
 				fonts: [
 					{
 						name: 'Roboto',
-						data: robotoRegular,
+						data: robotoRegularFont,
 						weight: 400,
 						style: 'normal',
 					},
 					{
 						name: 'Roboto',
-						data: robotoBold,
+						data: robotoBoldFont,
 						weight: 700,
 						style: 'normal',
 					},

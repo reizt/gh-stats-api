@@ -1,5 +1,5 @@
 {
-	"include": ["src/**/*.ts", "*.ts"],
+	"include": ["api/**/*.ts", "api/**/*.tsx"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
 		// target
@@ -10,11 +10,8 @@
 		"jsx": "react",
 
 		// paths
-		"baseUrl": "./",
-		"outDir": "tmp",
-		"paths": {
-			"~/*": ["src/*"]
-		},
+		"baseUrl": "api",
+		"outDir": "api",
 
 		// transpilation
 		"esModuleInterop": true,
@@ -26,9 +23,11 @@
 
 		// syntax
 		"strict": true,
-		"verbatimModuleSyntax": true,
+		// "verbatimModuleSyntax": true,
 		"noImplicitReturns": true,
 		"noUncheckedIndexedAccess": true,
-		"noUnusedLocals": true
+		"noUnusedLocals": true,
+
+		"diagnostics": null
 	}
 }

@@ -6,14 +6,14 @@ Github の README.md に以下のコードを貼るとテーマに応じて異�
 
 ```md
 <a href="https://github.com/USERNAME#gh-light-mode-only">
-  <img class="languages light" src="https://gh-top-langs.reizt.dev/api/top-langs.svg?userName=USERNAME&theme=light" width="260"/>
+  <img class="languages light" src="https://gh-stats-api.reizt.dev/api/top-langs.svg?username=USERNAME&theme=light" width="260"/>
 </a>
-<a href="https://github.com/USERNAME#gh-top-langs-dark-mode-only">
-  <img class="languages dark" src="https://gh-top-langs.reizt.dev/api/top-langs.svg?userName=USERNAME&theme=dark" width="260"/>
+<a href="https://github.com/USERNAME#gh-stats-api-dark-mode-only">
+  <img class="languages dark" src="https://gh-stats-api.reizt.dev/api/top-langs.svg?username=USERNAME&theme=dark" width="260"/>
 </a>
 ```
 
-HTML で取得したい場合: https://gh-top-langs.reizt.dev/api/top-langs.html?userName=USERNAME
+HTML で取得したい場合: https://gh-stats-api.reizt.dev/api/top-langs.html?username=USERNAME
 
 ## Tech Stacks
 
