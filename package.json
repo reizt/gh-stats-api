@@ -3,12 +3,13 @@
 	"type": "module",
 	"packageManager": "pnpm@9.1.1",
 	"scripts": {
+		"vd": "vercel dev --listen 6400",
 		"check-all": "run-p typecheck fmt.check",
 		"fmt": "biome check --apply .",
 		"fmt.check": "biome check .",
 		"typecheck": "tsc --incremental --noEmit --outDir tmp",
-		"ut": "vitest run",
-		"ut.watch": "vitest watch"
+		"e2e": "vitest run e2e",
+		"e2e.watch": "vitest e2e"
 	},
 	"dependencies": {
 		"react": "^18.3.1",
