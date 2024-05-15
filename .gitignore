@@ -1,10 +1,8 @@
 /node_modules
-/.build
-/.tsc
 /tmp
-/yarn-error.log
-/*.env*
-/.DS_Store
+
+*.env*
+.DS_Store
 
 .vercel
 /api/vercel.js
