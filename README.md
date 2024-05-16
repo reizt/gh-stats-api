@@ -13,9 +13,11 @@ Light Theme | Dark Theme
 
 ## How to use
 
-**URL**: https://gh-stats-api.reizt.dev/api/langs
+**URL**
 
-**Query Parameters**:
+https://gh-stats-api.reizt.dev/api/langs
+
+**Query Parameters**
 
 <!-- table -->
 
@@ -26,11 +28,16 @@ Light Theme | Dark Theme
 | `limit`    | number | Limit of the languages                | N        | 10      |
 | `output`   | string | Output format. `svg` or `html`        | N        | `svg`   |
 
+**Headers**
+
+You can include the stats of private repositories by using the `x-gh-token` header.
+The token should have the metadata read permission.
+
 ## Set up your profile
 
 > Note: Save your SVG files in the repository due to the limitation of Github API.
 
-Please replace `xxx` with your username.
+Replace `xxx` with your username.
 
 1. Create a repository `xxx/xxx` if not exists.
 2. Get the SVGs by the API.
@@ -49,9 +56,12 @@ curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=xxx&theme=dark'  
 <img src="./langs.dark.svg#gh-dark-mode-only" width="330"/>
 ```
 
-## Daily Update
+### Daily Update
 
 You can use cron job in Github Actions to update the SVGs daily.
+
+If you want to include private repository stats, you need to set the repository secrets `GITHUB_TOKEN`.
+If not, remove `-H` option in the `curl` command.
 
 ```yml
 on:
@@ -65,14 +75,12 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      USERNAME: xxx
     steps:
       - uses: actions/checkout@v4
       - name: Get SVGs
         run: |
-          curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=${{ env.USERNAME }}&theme=light' > ./langs.light.svg
-          curl --fail 'https://gh-stats-api.reizt.dev/api/langs?username=${{ env.USERNAME }}&theme=dark'  > ./langs.dark.svg
+          curl --fail -H "x-gh-token: ${{ github.token }}" 'https://gh-stats-api.reizt.dev/api/langs?username=${{ github.actor }}&theme=light' > ./langs.light.svg
+          curl --fail -H "x-gh-token: ${{ github.token }}" 'https://gh-stats-api.reizt.dev/api/langs?username=${{ github.actor }}&theme=dark'  > ./langs.dark.svg
       - name: Commit
         run: |
           git remote set-url origin https://github-actions:${{ github.token }}@github.com/${{ github.repository }}

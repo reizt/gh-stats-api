@@ -14,6 +14,7 @@ type LangNode = {
 type Input = {
 	username: string;
 	limit: number;
+	githubToken?: string;
 };
 
 export type LangStat = {
@@ -24,11 +25,12 @@ export type LangStat = {
 
 type Output = LangStat[];
 
-export const fetchTopLangs = async ({ username, limit }: Input): Promise<Output> => {
+export const fetchTopLangs = async (input: Input): Promise<Output> => {
+	const githubToken = input.githubToken ?? process.env.GITHUB_TOKEN;
 	const response = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
 		headers: new Headers({
-			Authorization: `bearer ${process.env.GITHUB_TOKEN}`,
+			Authorization: `bearer ${githubToken}`,
 		}),
 		body: JSON.stringify({
 			query: `
@@ -51,8 +53,8 @@ export const fetchTopLangs = async ({ username, limit }: Input): Promise<Output>
         }
       }`,
 			variables: {
-				login: username,
-				limit,
+				login: input.username,
+				limit: input.limit,
 			},
 		}),
 	});
