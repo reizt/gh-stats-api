@@ -1,5 +1,5 @@
 {
-	"include": ["api/*.ts", "api/*.tsx", "e2e/*.test.ts"],
+	"include": ["api/*.ts", "api/*.tsx", "core/*.ts", "core/*.tsx", "e2e/*.test.ts"],
 	"exclude": ["node_modules"],
 	"compilerOptions": {
 		// target
@@ -9,10 +9,6 @@
 		"types": ["vitest/globals"],
 		"jsx": "react",
 
-		// paths
-		"baseUrl": "api",
-		"outDir": "api",
-
 		// transpilation
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
@@ -20,6 +16,7 @@
 		"skipLibCheck": true,
 		"isolatedModules": true,
 		"forceConsistentCasingInFileNames": true,
+		"noEmit": true,
 
 		// syntax
 		"strict": true,

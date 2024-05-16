@@ -4,7 +4,7 @@
 		"enabled": true
 	},
 	"files": {
-		"include": ["api/**/*", "vitest.config.ts", "tsconfig.json", "biome.jsonc"]
+		"include": ["api/*", "core/*", "e2e/*", "vitest.config.ts", "tsconfig.json", "biome.jsonc"]
 	},
 	"formatter": {
 		"indentStyle": "tab",

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { fetchTopLangs } from './fetch-top-langs';
-import { renderTopLangs } from './render-top-langs';
+import { fetchTopLangs } from '../core/fetch-top-langs';
+import { renderTopLangs } from '../core/render-top-langs';
 
 export const config = {
 	runtime: 'edge',

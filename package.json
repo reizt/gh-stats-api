@@ -4,10 +4,10 @@
 	"packageManager": "pnpm@9.1.1",
 	"scripts": {
 		"vd": "vercel dev --listen 6400",
-		"check-all": "run-p typecheck fmt.check",
+		"check": "run-p typecheck fmt.check",
 		"fmt": "biome check --apply .",
 		"fmt.check": "biome check .",
-		"typecheck": "tsc --incremental --noEmit --outDir tmp",
+		"typecheck": "tsc --incremental",
 		"e2e": "vitest run e2e",
 		"e2e.watch": "vitest e2e"
 	},
