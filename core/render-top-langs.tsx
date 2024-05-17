@@ -70,7 +70,17 @@ export const renderTopLangs = async ({ output, ...props }: Props & { output: 'ht
 	const reactNode = <TopLangsSVG {...props} />;
 	switch (output) {
 		case 'html': {
-			const html = ReactDOMServer.renderToString(reactNode);
+			const html = ReactDOMServer.renderToString(
+				<html lang="en">
+					<head>
+						<meta charSet="UTF-8" />
+						<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+						<title>Languages</title>
+						<style>{`body { margin: 0; font-family: 'Roboto', sans-serif; }`}</style>
+					</head>
+					<body>{reactNode}</body>
+				</html>,
+			);
 			return html;
 		}
 		case 'svg': {
