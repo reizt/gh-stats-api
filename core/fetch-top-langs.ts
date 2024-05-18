@@ -77,6 +77,7 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 		}
 	}
 	const langs: Output = [];
+	let totalRate = 0;
 	for (const langName in langsMap) {
 		const lang = langsMap[langName]!;
 		langs.push({
@@ -84,7 +85,16 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 			color: lang.color,
 			rate: lang.size / totalSize,
 		});
+		totalRate += (lang.size * 100) / totalSize;
 	}
 	langs.sort((a, b) => b.rate - a.rate);
-	return langs;
+	const limitedLangs = langs.slice(0, input.limit);
+	if (totalRate < 99.5) {
+		limitedLangs.push({
+			name: 'Others',
+			color: '#777777',
+			rate: 100 - totalRate,
+		});
+	}
+	return limitedLangs;
 };

@@ -1,7 +1,6 @@
 {
 	"private": true,
 	"type": "module",
-	"packageManager": "pnpm@9.1.1",
 	"scripts": {
 		"vd": "vercel dev --listen 6400",
 		"check": "run-p typecheck fmt.check",
