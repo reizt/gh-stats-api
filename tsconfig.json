@@ -8,6 +8,7 @@
 		"moduleResolution": "Node",
 		"types": ["vitest/globals"],
 		"jsx": "react",
+		"outDir": "node_modules/.tmp",
 
 		// transpilation
 		"esModuleInterop": true,

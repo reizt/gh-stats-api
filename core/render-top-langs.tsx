@@ -107,5 +107,7 @@ export const renderTopLangs = async ({ output, ...props }: Props & { output: 'ht
 			});
 			return svg;
 		}
+		default:
+			throw new Error(`Unknown output type: ${output}`);
 	}
 };

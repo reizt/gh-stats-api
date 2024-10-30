@@ -3,27 +3,27 @@
 	"type": "module",
 	"scripts": {
 		"vd": "vercel dev --listen 6400",
-		"check": "run-p typecheck fmt.check",
-		"fmt": "biome check --apply .",
-		"fmt.check": "biome check .",
-		"typecheck": "tsc --incremental",
+		"format": "biome check --apply .",
+		"check": "run-p check.*",
+		"check.biome": "biome check .",
+		"check.tsc": "tsc --incremental",
 		"e2e": "vitest run e2e",
 		"e2e.watch": "vitest e2e"
 	},
 	"dependencies": {
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"satori": "^0.10.13",
+		"satori": "^0.10.14",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.7.3",
-		"@types/node": "^20.12.12",
-		"@types/react": "^18.3.2",
-		"@types/react-dom": "^18.3.0",
-		"lefthook": "^1.6.11",
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "^20.17.3",
+		"@types/react": "^18.3.12",
+		"@types/react-dom": "^18.3.1",
+		"lefthook": "^1.8.2",
 		"npm-run-all": "^4.1.5",
-		"typescript": "^5.4.5",
+		"typescript": "^5.6.3",
 		"vitest": "^1.6.0"
 	}
 }
