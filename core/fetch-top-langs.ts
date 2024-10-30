@@ -14,6 +14,7 @@ type LangNode = {
 type Input = {
 	username: string;
 	limit: number;
+	ignore?: string[];
 	githubToken?: string;
 };
 
@@ -61,6 +62,7 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 
 	const responseJson = await response.json();
 	const nodes = responseJson.data.user.repositories.nodes as LangNode[];
+	console.log('✅ nodes:', nodes);
 
 	const langsMap: Record<string, { color: string; size: number }> = {};
 	let totalSize = 0;
@@ -69,6 +71,9 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 			const langName = edge.node.name;
 			const langColor = edge.node.color;
 			const langSize = edge.size;
+			if (input.ignore?.includes(langName) === true) {
+				continue;
+			}
 			totalSize += langSize;
 			if (langsMap[langName] == null) {
 				langsMap[langName] = { color: langColor, size: 0 };
@@ -76,6 +81,8 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 			langsMap[langName]!.size += langSize;
 		}
 	}
+	console.log('✅ langsMap:', langsMap);
+
 	const langs: Output = [];
 	let totalRate = 0;
 	for (const langName in langsMap) {
@@ -96,5 +103,6 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 			rate: 100 - totalRate,
 		});
 	}
+	console.log('✅ limitedLangs:', limitedLangs);
 	return limitedLangs;
 };

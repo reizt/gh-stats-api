@@ -11,6 +11,7 @@ const inputZ = z.object({
 	output: z.enum(['svg', 'html']),
 	theme: z.enum(['light', 'dark']),
 	limit: z.coerce.number().int(),
+	ignore: z.array(z.string()).optional(),
 	githubToken: z.string().optional(),
 });
 type Input = z.infer<typeof inputZ>;
@@ -23,12 +24,16 @@ export default async function (req: Request) {
 			output: query.get('output') ?? 'svg',
 			theme: query.get('theme') ?? 'light',
 			limit: query.get('limit') ?? 10,
+			ignore: query.get('ignore')?.split(','),
 			githubToken: req.headers.get('x-gh-token') ?? undefined,
 		};
+		console.log('✅ unsafeInput:', unsafeInput);
 		const input = inputZ.parse(unsafeInput);
+		console.log('✅ input:', input);
 		const langs = await fetchTopLangs({
 			username: input.username,
 			limit: input.limit,
+			ignore: input.ignore,
 			githubToken: input.githubToken,
 		});
 		const content = await renderTopLangs({
