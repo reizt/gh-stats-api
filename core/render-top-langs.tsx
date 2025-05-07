@@ -62,6 +62,9 @@ const TopLangsSVG: React.FC<Props> = ({ username, langs, theme }) => {
 
 const fetchFont = async (url: string) => {
 	const response = await fetch(url);
+	if (!response.ok) {
+		throw new Error(`Failed to fetch font from ${url}`);
+	}
 	const buffer = await response.arrayBuffer();
 	return buffer;
 };
