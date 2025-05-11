@@ -21,12 +21,13 @@ https://ghs.reij.uno/api/langs
 
 <!-- table -->
 
-| Name       | Type   | Description                           | Required | Default |
-| ---------- | ------ | ------------------------------------- | -------- | ------- |
-| `username` | string | Github username                       | Y        | -       |
-| `theme`    | string | Theme of the chart. `light` or `dark` | N        | `light` |
-| `limit`    | number | Limit of the languages                | N        | 10      |
-| `output`   | string | Output format. `svg` or `html`        | N        | `svg`   |
+| Name       | Type     | Description                           | Required | Default |
+| ---------- | -------- | ------------------------------------- | -------- | ------- |
+| `username` | string   | Github username                       | Y        | -       |
+| `theme`    | string   | Theme of the chart. `light` or `dark` | N        | `light` |
+| `limit`    | number   | Limit of the languages                | N        | 10      |
+| `output`   | string   | Output format. `svg` or `html`        | N        | `svg`   |
+| `ignore`   | string[] | Excluded languages                    | N        | -       |
 
 **Headers**
 
