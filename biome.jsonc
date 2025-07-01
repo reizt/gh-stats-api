@@ -1,11 +1,8 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
+	"$schema": "https://biomejs.dev/schemas/2.0.6/schema.json",
+	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"files": {
-		"include": ["**/*.ts", "**/*.tsx"],
-		"ignore": ["node_modules", "dist", "build", "public", "public/*", "public/**/*"]
+		"includes": ["**/*.ts", "**/*.tsx", "!**/node_modules", "!**/dist", "!**/build", "!**/public", "!**/public/**/*", "!**/public/**/*"]
 	},
 	"formatter": {
 		"indentStyle": "tab",
@@ -18,7 +15,6 @@
 	},
 	"linter": {
 		"rules": {
-			"all": true,
 			"style": {
 				"noDefaultExport": "off",
 				"useNamingConvention": "off",
@@ -26,11 +22,21 @@
 				"noParameterProperties": "off",
 				"useBlockStatements": "off",
 				"noNonNullAssertion": "off",
-				"noNamespaceImport": "off"
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
 			},
 			"performance": {
 				"noBarrelFile": "off",
-				"noReExportAll": "off"
+				"noReExportAll": "off",
+				"noNamespaceImport": "off"
 			},
 			"correctness": {
 				"noUndeclaredVariables": "off",
@@ -40,7 +46,6 @@
 			"suspicious": {
 				"useAwait": "off",
 				"noConsole": "off",
-				"noConsoleLog": "off",
 				"noExplicitAny": "off",
 				"noEmptyBlockStatements": "off",
 				"noReactSpecificProps": "off"
