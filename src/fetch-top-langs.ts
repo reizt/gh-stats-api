@@ -28,6 +28,9 @@ type Output = LangStat[];
 
 export async function fetchTopLangs(input: Input): Promise<Output> {
 	const githubToken = input.githubToken ?? process.env.GITHUB_TOKEN;
+	if (githubToken == null) {
+		throw new Error('GITHUB_TOKEN is not set');
+	}
 	const response = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
 		headers: new Headers({
