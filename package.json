@@ -2,11 +2,12 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"vd": "vercel dev --listen 6400",
+    "remote.tail": "wrangler tail gh-stats-api",
 		"format": "biome check --write .",
 		"check": "run-p check.*",
 		"check.biome": "biome check .",
 		"check.tsc": "tsc --incremental",
+		"test": "vitest",
 		"e2e": "vitest run e2e",
 		"e2e.watch": "vitest e2e"
 	},
