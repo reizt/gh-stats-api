@@ -1,6 +1,4 @@
-// biome-ignore lint/style/useImportType: import react
-import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { render } from 'preact-render-to-string';
 import satori from 'satori';
 import type { LangStat } from './fetch-top-langs';
 import robotoBoldFont from './fonts/roboto-bold.ttf';
@@ -12,7 +10,7 @@ type Props = {
 	theme: 'light' | 'dark';
 };
 
-const TopLangsSVG: React.FC<Props> = ({ username, langs, theme }) => {
+function TopLangsNode({ username, langs, theme }: Props) {
 	return (
 		<div
 			style={{
@@ -60,13 +58,13 @@ const TopLangsSVG: React.FC<Props> = ({ username, langs, theme }) => {
 			</div>
 		</div>
 	);
-};
+}
 
-export const renderTopLangs = async ({ output, ...props }: Props & { output: 'html' | 'svg' }) => {
-	const reactNode = <TopLangsSVG {...props} />;
+export async function renderTopLangs({ output, ...props }: Props & { output: 'html' | 'svg' }) {
+	const reactNode = <TopLangsNode {...props} />;
 	switch (output) {
 		case 'html': {
-			const html = ReactDOMServer.renderToString(
+			const html = render(
 				<html lang="en">
 					<head>
 						<meta charSet="UTF-8" />
@@ -80,7 +78,7 @@ export const renderTopLangs = async ({ output, ...props }: Props & { output: 'ht
 			return html;
 		}
 		case 'svg': {
-			const svg = await satori(reactNode, {
+			const svg = await satori(reactNode as any, {
 				fonts: [
 					{
 						name: 'Roboto',
@@ -103,4 +101,4 @@ export const renderTopLangs = async ({ output, ...props }: Props & { output: 'ht
 		default:
 			throw new Error(`Unknown output type: ${output}`);
 	}
-};
+}

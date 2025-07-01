@@ -26,7 +26,7 @@ export type LangStat = {
 
 type Output = LangStat[];
 
-export const fetchTopLangs = async (input: Input): Promise<Output> => {
+export async function fetchTopLangs(input: Input): Promise<Output> {
 	const githubToken = input.githubToken ?? process.env.GITHUB_TOKEN;
 	const response = await fetch('https://api.github.com/graphql', {
 		method: 'POST',
@@ -105,4 +105,4 @@ export const fetchTopLangs = async (input: Input): Promise<Output> => {
 	}
 	console.log('✅ limitedLangs:', limitedLangs);
 	return limitedLangs;
-};
+}
