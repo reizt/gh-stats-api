@@ -15,19 +15,20 @@ Light Theme | Dark Theme
 
 **URL**
 
-https://gh-stats-api.reizt.workers.dev/langs
+`https://gh-stats-api.reizt.workers.dev/<username>`
 
 **Query Parameters**
 
+All parameters are optional.
+
 <!-- table -->
 
-| Name       | Type     | Description                           | Required | Default |
-| ---------- | -------- | ------------------------------------- | -------- | ------- |
-| `username` | string   | Github username                       | Y        | -       |
-| `theme`    | string   | Theme of the chart. `light` or `dark` | N        | `light` |
-| `limit`    | number   | Limit of the languages                | N        | 10      |
-| `output`   | string   | Output format. `svg` or `html`        | N        | `svg`   |
-| `ignore`   | string[] | Excluded languages                    | N        | -       |
+| Name     | Type     | Description                           | Default |
+| -------- | -------- | ------------------------------------- | ------- |
+| `theme`  | string   | Theme of the chart. `light` or `dark` | `light` |
+| `limit`  | number   | Limit of the languages                | 10      |
+| `output` | string   | Output format. `svg` or `html`        | `svg`   |
+| `ignore` | string[] | Excluded languages                    | -       |
 
 **Headers**
 
@@ -44,8 +45,8 @@ Replace `xxx` with your username.
 2. Get the SVGs by the API.
 
 ```sh
-curl --fail 'https://gh-stats-api.reizt.workers.dev/langs?username=xxx&theme=light' > ./langs.light.svg
-curl --fail 'https://gh-stats-api.reizt.workers.dev/langs?username=xxx&theme=dark'  > ./langs.dark.svg
+curl --fail 'https://gh-stats-api.reizt.workers.dev/xxx?theme=light' > ./langs.light.svg
+curl --fail 'https://gh-stats-api.reizt.workers.dev/xxx?theme=dark'  > ./langs.dark.svg
 ```
 
 1. Show the SVGs in `README.md`.
@@ -80,8 +81,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Get SVGs
         run: |
-          curl --fail -H "x-gh-token: ${{ github.token }}" 'https://gh-stats-api.reizt.workers.dev/langs?username=${{ github.actor }}&theme=light' > ./langs.light.svg
-          curl --fail -H "x-gh-token: ${{ github.token }}" 'https://gh-stats-api.reizt.workers.dev/langs?username=${{ github.actor }}&theme=dark'  > ./langs.dark.svg
+          curl --fail -H "x-gh-token: ${{ github.token }}" 'https://gh-stats-api.reizt.workers.dev/${{ github.actor }}?theme=light' > ./langs.light.svg
+          curl --fail -H "x-gh-token: ${{ github.token }}" 'https://gh-stats-api.reizt.workers.dev/${{ github.actor }}?theme=dark'  > ./langs.dark.svg
       - name: Commit
         run: |
           git remote set-url origin https://github-actions:${{ github.token }}@github.com/${{ github.repository }}
