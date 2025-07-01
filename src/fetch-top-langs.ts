@@ -63,8 +63,16 @@ export async function fetchTopLangs(input: Input): Promise<Output> {
 		}),
 	});
 
-	const responseJson = await response.json();
-	const nodes = responseJson.data.user.repositories.nodes as LangNode[];
+	const responseText = await response.text();
+	const nodes = (() => {
+		try {
+			const responseJson = JSON.parse(responseText);
+			return responseJson.data.user.repositories.nodes as LangNode[];
+		} catch (err) {
+			console.log('❌ response: ', responseText);
+			throw err;
+		}
+	})();
 	console.log('✅ nodes:', nodes);
 
 	const langsMap: Record<string, { color: string; size: number }> = {};
