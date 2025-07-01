@@ -24,9 +24,7 @@ export type LangStat = {
 	rate: number;
 };
 
-type Output = LangStat[];
-
-export async function fetchTopLangs(input: Input): Promise<Output> {
+export async function fetchTopLangs(input: Input): Promise<LangStat[]> {
 	const githubToken = input.githubToken ?? process.env.GITHUB_TOKEN;
 	if (githubToken == null) {
 		throw new Error('GITHUB_TOKEN is not set');
@@ -35,6 +33,7 @@ export async function fetchTopLangs(input: Input): Promise<Output> {
 		method: 'POST',
 		headers: new Headers({
 			Authorization: `bearer ${githubToken}`,
+			'User-Agent': 'gh-stats-api',
 		}),
 		body: JSON.stringify({
 			query: `
@@ -94,7 +93,7 @@ export async function fetchTopLangs(input: Input): Promise<Output> {
 	}
 	console.log('✅ langsMap:', langsMap);
 
-	const langs: Output = [];
+	const langs: LangStat[] = [];
 	let totalRate = 0;
 	for (const langName in langsMap) {
 		const lang = langsMap[langName]!;
