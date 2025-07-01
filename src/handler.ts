@@ -1,10 +1,6 @@
 import { z } from 'zod';
-import { fetchTopLangs } from '../core/fetch-top-langs';
-import { renderTopLangs } from '../core/render-top-langs';
-
-export const config = {
-	runtime: 'edge',
-};
+import { fetchTopLangs } from './fetch-top-langs';
+import { renderTopLangs } from './render-top-langs';
 
 const inputZ = z.object({
 	username: z.string(),
@@ -16,7 +12,7 @@ const inputZ = z.object({
 });
 type Input = z.infer<typeof inputZ>;
 
-export default async function (req: Request) {
+export async function handler(req: Request) {
 	try {
 		const query = new URL(req.url).searchParams;
 		const unsafeInput: { [K in keyof Input]: unknown } = {

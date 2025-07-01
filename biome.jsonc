@@ -4,7 +4,8 @@
 		"enabled": true
 	},
 	"files": {
-		"include": ["api/*", "core/*", "e2e/*", "vitest.config.ts", "tsconfig.json", "biome.jsonc"]
+		"include": ["**/*.ts", "**/*.tsx"],
+		"ignore": ["node_modules", "dist", "build", "public", "public/*", "public/**/*"]
 	},
 	"formatter": {
 		"indentStyle": "tab",

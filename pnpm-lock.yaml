@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      hono:
+        specifier: ^4.8.3
+        version: 4.8.3
       react:
         specifier: ^19.1.0
         version: 19.1.0
@@ -683,6 +686,10 @@ packages:
   hex-rgb@4.3.0:
     resolution: {integrity: sha512-Ox1pJVrDCyGHMG9CFg1tmrRUMRPRsAWYc/PinY0XzJU4K7y7vjNoLKIQ7BR5UJMCxNN8EM1MNDmHWA/B3aZUuw==}
     engines: {node: '>=6'}
+
+  hono@4.8.3:
+    resolution: {integrity: sha512-jYZ6ZtfWjzBdh8H/0CIFfCBHaFL75k+KMzaM177hrWWm2TWL39YMYaJgB74uK/niRc866NMlH9B8uCvIo284WQ==}
+    engines: {node: '>=16.9.0'}
 
   hosted-git-info@2.8.9:
     resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
@@ -1861,6 +1868,8 @@ snapshots:
       function-bind: 1.1.2
 
   hex-rgb@4.3.0: {}
+
+  hono@4.8.3: {}
 
   hosted-git-info@2.8.9: {}
 

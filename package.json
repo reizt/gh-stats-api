@@ -3,7 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"vd": "vercel dev --listen 6400",
-		"format": "biome check --apply .",
+		"format": "biome check --write .",
 		"check": "run-p check.*",
 		"check.biome": "biome check .",
 		"check.tsc": "tsc --incremental",
@@ -11,6 +11,7 @@
 		"e2e.watch": "vitest e2e"
 	},
 	"dependencies": {
+		"hono": "^4.8.3",
 		"react": "^19.1.0",
 		"react-dom": "^19.1.0",
 		"satori": "^0.12.2",
