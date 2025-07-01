@@ -3,7 +3,8 @@ name = "gh-stats-api"
 compatibility_date = "2025-07-01"
 compatibility_flags = ["nodejs_compat"]
 
-main = "src/index.ts"
+build.command = "pnpm build"
+main = "dist/index.js"
 
 [observability.logs]
 enabled = true

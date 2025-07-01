@@ -3,6 +3,8 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import satori from 'satori';
 import type { LangStat } from './fetch-top-langs';
+import robotoBoldFont from './fonts/roboto-bold.ttf';
+import robotoRegularFont from './fonts/roboto-regular.ttf';
 
 type Props = {
 	username: string;
@@ -60,16 +62,6 @@ const TopLangsSVG: React.FC<Props> = ({ username, langs, theme }) => {
 	);
 };
 
-const fetchFont = async (url: string) => {
-	const response = await fetch(url);
-	if (!response.ok) {
-		console.log(response.status, await response.text());
-		throw new Error(`Failed to fetch font from ${url}`);
-	}
-	const buffer = await response.arrayBuffer();
-	return buffer;
-};
-
 export const renderTopLangs = async ({ output, ...props }: Props & { output: 'html' | 'svg' }) => {
 	const reactNode = <TopLangsSVG {...props} />;
 	switch (output) {
@@ -88,9 +80,6 @@ export const renderTopLangs = async ({ output, ...props }: Props & { output: 'ht
 			return html;
 		}
 		case 'svg': {
-			const fontUrlRoot = 'https://fonts.werp.in';
-			const robotoRegularFont = await fetchFont(`${fontUrlRoot}/Roboto-Regular.ttf`);
-			const robotoBoldFont = await fetchFont(`${fontUrlRoot}/Roboto-Bold.ttf`);
 			const svg = await satori(reactNode, {
 				fonts: [
 					{
