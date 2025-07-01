@@ -8,8 +8,8 @@ const app = new Hono();
 app.use('*', async (c, next) => {
 	try {
 		return await next();
-	} catch (error) {
-		console.error('❌ error:', error);
+	} catch (err) {
+		console.error('❌ error:', err);
 		return c.text('Internal Server Error', 500);
 	}
 });
