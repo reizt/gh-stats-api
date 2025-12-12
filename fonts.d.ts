@@ -1,4 +1,4 @@
 declare module '*.ttf' {
-	const content: Uint8Array;
+	const content: ArrayBuffer;
 	export default content;
 }
