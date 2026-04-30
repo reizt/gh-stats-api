@@ -10,3 +10,8 @@ observability.enabled = true
 
 [observability.logs]
 enabled = true
+
+[env.production]
+routes = [
+  { pattern = "ghs.reiju.me", custom_domain = true }
+]
