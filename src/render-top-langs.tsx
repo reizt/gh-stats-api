@@ -4,6 +4,13 @@ import type { LangStat } from './fetch-top-langs';
 import robotoBoldFont from './fonts/roboto-bold.ttf';
 import robotoRegularFont from './fonts/roboto-regular.ttf';
 
+function decodeFont(font: string | ArrayBuffer): ArrayBuffer {
+	return typeof font === 'string' ? Uint8Array.from(atob(font), (character) => character.charCodeAt(0)).buffer : font;
+}
+
+const robotoBoldFontData = decodeFont(robotoBoldFont);
+const robotoRegularFontData = decodeFont(robotoRegularFont);
+
 type Props = {
 	username: string;
 	langs: LangStat[];
@@ -82,13 +89,13 @@ export async function renderTopLangs({ output, ...props }: Props & { output: 'ht
 				fonts: [
 					{
 						name: 'Roboto',
-						data: robotoRegularFont,
+						data: robotoRegularFontData,
 						weight: 400,
 						style: 'normal',
 					},
 					{
 						name: 'Roboto',
-						data: robotoBoldFont,
+						data: robotoBoldFontData,
 						weight: 700,
 						style: 'normal',
 					},
