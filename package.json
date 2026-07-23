@@ -5,7 +5,7 @@
 	"scripts": {
 		"remote.tail": "wrangler tail gh-stats-api",
 		"build": "bun run build.js",
-		"deploy": "wrangler deploy --env production",
+		"deploy": "wrangler deploy",
 		"format": "biome check --write .",
 		"check": "run-p check.*",
 		"check.biome": "biome check .",

@@ -2,8 +2,9 @@ import { Hono } from 'hono';
 import { z } from 'zod';
 import { fetchTopLangs } from './fetch-top-langs';
 import { renderTopLangs } from './render-top-langs';
+import { type StatsEnv, updateStats } from './update-stats';
 
-const app = new Hono();
+const app = new Hono<{ Bindings: StatsEnv }>();
 
 app.use('*', async (c, next) => {
 	try {
@@ -40,7 +41,7 @@ app.get('/:username', async (c) => {
 		username: input.username,
 		limit: input.limit,
 		ignore: input.ignore,
-		githubToken: input.githubToken,
+		githubToken: input.githubToken ?? c.env.GITHUB_TOKEN,
 	});
 	const content = await renderTopLangs({
 		langs,
@@ -57,4 +58,7 @@ app.get('/:username', async (c) => {
 	});
 });
 
-export default app;
+export default {
+	fetch: app.fetch,
+	scheduled: (_controller: unknown, env: StatsEnv) => updateStats(env),
+};

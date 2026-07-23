@@ -2,7 +2,7 @@
 	"$schema": "https://biomejs.dev/schemas/2.5.5/schema.json",
 	"assist": { "actions": { "source": { "organizeImports": "on" } } },
 	"files": {
-		"includes": ["**/*.ts", "**/*.tsx", "!**/node_modules", "!**/dist", "!**/build", "!**/public", "!**/public/**/*", "!**/public/**/*"]
+		"includes": ["**/*.ts", "**/*.tsx", "!worker-configuration.d.ts", "!**/node_modules", "!**/dist", "!**/build", "!**/public", "!**/public/**/*", "!**/public/**/*"]
 	},
 	"formatter": {
 		"indentStyle": "tab",
