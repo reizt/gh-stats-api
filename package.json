@@ -16,19 +16,19 @@
 		"e2e.watch": "vitest e2e"
 	},
 	"dependencies": {
-		"hono": "^4.12.31",
-		"preact": "^10.29.7",
-		"preact-render-to-string": "^6.7.0",
-		"satori": "^0.29.0",
-		"zod": "^4.4.3"
+		"hono": "^4.13.13",
+		"preact": "^11.0.1",
+		"preact-render-to-string": "^6.8.1",
+		"satori": "^0.62.0",
+		"zod": "^4.6.7"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.5.5",
-		"@types/node": "^26.1.1",
-		"lefthook": "^2.1.10",
+		"@biomejs/biome": "^2.5.15",
+		"@types/node": "^26.6.5",
+		"lefthook": "^2.2.2",
 		"npm-run-all": "^4.1.5",
 		"typescript": "^7.0.2",
-		"vitest": "^4.1.10",
-		"wrangler": "^4.113.0"
+		"vitest": "^5.0.5",
+		"wrangler": "^4.151.1"
 	}
 }
